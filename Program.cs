@@ -9,8 +9,12 @@ namespace Lab3
     {
         static void Main(string[] args)
         {
-            List<int> intList = GenerateRandomIntList(1000, 5000);
-            
+            List<int> intList = GenerateRandomIntList(10000, 5000);
+
+            double totalTime = 0.0;
+            double averageTime = 0.0;
+
+
             //List<double> doubleList = GenerateRandomDoubleList(100, 500);
 
             //Console.WriteLine("[{0}]", string.Join(", ", intList.ToArray()));
@@ -20,7 +24,7 @@ namespace Lab3
             BubbleSort<int> bubbleSort = new BubbleSort<int>();
             Console.WriteLine("BUBBLE SORT");
 
-            double totalTime = 0;
+            totalTime = 0;
 
             for (int i = 0; i < 11; i++)
             {
@@ -29,8 +33,8 @@ namespace Lab3
                 totalTime += TimeSort<int>(bubbleSort, intListCopy);
             }
 
-            double averageTime = totalTime / 11;
-            Console.WriteLine( $"{averageTime}" );
+            averageTime = totalTime / 11;
+            Console.WriteLine($"{averageTime}");
 
 
 
@@ -47,6 +51,23 @@ namespace Lab3
 
             averageTime = totalTime / 11;
             Console.WriteLine($"{averageTime}");
+
+
+
+            BucketSort bucketSort = new BucketSort();
+            Console.WriteLine("BUCKET SORT");
+            totalTime = 0;
+
+            for (int i = 0; i < 11; i++)
+            {
+                List<int> intListCopy = new List<int>(intList);   // make a copy of the original unsorted array
+
+                totalTime += TimeSort(bucketSort, intListCopy);
+            }
+
+            averageTime = totalTime / 11;
+            Console.WriteLine($"{averageTime}");
+
 
             //Console.WriteLine("[{0}]", string.Join(", ", intList.ToArray()));
 
@@ -154,6 +175,7 @@ namespace Lab3
 
             // print elapsed time data
             Console.WriteLine(ts.TotalSeconds);
+
 
             return ts.TotalSeconds;
         }
