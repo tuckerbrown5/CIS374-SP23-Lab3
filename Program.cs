@@ -9,7 +9,7 @@ namespace Lab3
     {
         static void Main(string[] args)
         {
-            List<int> intList = GenerateRandomIntList(10000, 5000);
+            List<int> intList = GenerateRandomIntList(10000000, 5000);
 
             double totalTime = 0.0;
             double averageTime = 0.0;
@@ -21,52 +21,101 @@ namespace Lab3
             //Console.WriteLine("[{0}]", string.Join(", ", doubleList.ToArray()));
 
 
-            BubbleSort<int> bubbleSort = new BubbleSort<int>();
-            Console.WriteLine("BUBBLE SORT");
+            //BubbleSort<int> bubbleSort = new BubbleSort<int>();
+            //Console.WriteLine("BUBBLE SORT");
 
+            //totalTime = 0;
+
+            //for (int i = 0; i < 11; i++)
+            //{
+            //    List<int> intListCopy = new List<int>(intList);   // make a copy of the original unsorted array
+
+            //    totalTime += TimeSort<int>(bubbleSort, intListCopy);
+            //}
+
+            //averageTime = totalTime / 11;
+            //Console.WriteLine($"{averageTime}");
+
+
+
+            //InsertionSort<int> insertionSort = new InsertionSort<int>();
+            //Console.WriteLine("INSERTION SORT");
+            //totalTime = 0;
+
+            //for (int i = 0; i < 11; i++)
+            //{
+            //    List<int> intListCopy = new List<int>(intList);   // make a copy of the original unsorted array
+
+            //    totalTime += TimeSort<int>(insertionSort, intListCopy);
+            //}
+
+            //averageTime = totalTime / 11;
+            //Console.WriteLine($"{averageTime}");
+
+
+            MergeSort<int> mergeSort = new MergeSort<int>();
+            Console.WriteLine("MERGE SORT");
             totalTime = 0;
 
             for (int i = 0; i < 11; i++)
             {
                 List<int> intListCopy = new List<int>(intList);   // make a copy of the original unsorted array
 
-                totalTime += TimeSort<int>(bubbleSort, intListCopy);
+                totalTime += TimeSort<int>(mergeSort, intListCopy);
             }
 
             averageTime = totalTime / 11;
             Console.WriteLine($"{averageTime}");
 
-
-
-            InsertionSort<int> insertionSort = new InsertionSort<int>();
-            Console.WriteLine("INSERTION SORT");
+            HeapSort<int> heapSort = new HeapSort<int>();
+            Console.WriteLine("HEAP SORT");
             totalTime = 0;
 
             for (int i = 0; i < 11; i++)
             {
                 List<int> intListCopy = new List<int>(intList);   // make a copy of the original unsorted array
 
-                totalTime += TimeSort<int>(insertionSort, intListCopy);
+                totalTime += TimeSort<int>(heapSort, intListCopy);
             }
 
             averageTime = totalTime / 11;
             Console.WriteLine($"{averageTime}");
 
 
+            //BucketSort bucketSort = new BucketSort();
+            //Console.WriteLine("BUCKET SORT");
+            //totalTime = 0;
 
-            BucketSort bucketSort = new BucketSort();
-            Console.WriteLine("BUCKET SORT");
-            totalTime = 0;
+            //for (int i = 0; i < 11; i++)
+            //{
+            //    List<int> intListCopy = new List<int>(intList);   // make a copy of the original unsorted array
 
-            for (int i = 0; i < 11; i++)
-            {
-                List<int> intListCopy = new List<int>(intList);   // make a copy of the original unsorted array
+            //    totalTime += TimeSort(bucketSort, intListCopy);
+            //}
 
-                totalTime += TimeSort(bucketSort, intListCopy);
-            }
+            //averageTime = totalTime / 11;
+            //Console.WriteLine($"{averageTime}");
 
-            averageTime = totalTime / 11;
-            Console.WriteLine($"{averageTime}");
+
+
+            //RadixSort radixSort = new RadixSort();
+            //Console.WriteLine("RADIX SORT");
+            //totalTime = 0;
+
+            //for (int i = 0; i < 11; i++)
+            //{
+            //    List<int> intListCopy = new List<int>(intList);   // make a copy of the original unsorted array
+
+            //    totalTime += TimeSort(radixSort, intListCopy);
+            //}
+
+            //averageTime = totalTime / 11;
+            //Console.WriteLine($"{averageTime}");
+
+
+
+
+
 
 
             //Console.WriteLine("[{0}]", string.Join(", ", intList.ToArray()));
@@ -192,6 +241,26 @@ namespace Lab3
                 list.Add(random.Next(maxValue));               
             }
 
+            //list.Sort();
+            //list.Reverse();
+
+            int n = (int)(length * 0.025);
+            for (int i = 0; i < n; i++)
+            {
+                int rand1 = random.Next(0, length);
+                int rand2 = random.Next(0, length);
+                int temp = list[rand1];
+                list[rand1] = list[rand2];
+                list[rand2] = temp;
+            }
+
+            //Add some random elements at the end
+            for (int i = length; i < length + n; i++)
+            {
+                list.Add(random.Next(maxValue));
+            }
+
+
             return list;
         }
 
@@ -204,6 +273,25 @@ namespace Lab3
             for (int i = 0; i < length; i++)
             {
                 list.Add(random.NextDouble()* maxValue);
+            }
+
+            //list.Sort();
+            //list.Reverse();
+
+            int n = (int)(length * 0.025);
+            for (int i = 0; i < n; i++)
+            {
+                int rand1 = random.Next(0, length);
+                int rand2 = random.Next(0, length);
+                double temp = list[rand1];
+                list[rand1] = list[rand2];
+                list[rand2] = temp;
+            }
+
+            // Add some random elements at the end
+            for (int i = length; i < length + n; i++)
+            {
+                list.Add(random.NextDouble() * maxValue);
             }
 
             return list;
